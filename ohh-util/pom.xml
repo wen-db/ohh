@@ -19,6 +19,14 @@
         <groupId>org.apache.poi</groupId>
         <artifactId>poi-ooxml</artifactId>
     </dependency>
+    <dependency>
+        <groupId>org.webjars.npm</groupId>
+        <artifactId>pako</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.java-websocket</groupId>
+        <artifactId>Java-WebSocket</artifactId>
+    </dependency>
 </dependencies>
 
 </project>
