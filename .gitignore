@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+ohh-dao/ohh-dao.iml
+ohh-main/ohh-main.iml
+ohh-service/ohh-service.iml
+ohh-util/ohh-util.iml
+ohh-util/target/
+ohh-vo/ohh-vo.iml
+ohh-web/ohh-web.iml
+ohh.iml
