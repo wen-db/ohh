@@ -90,7 +90,7 @@
         </dependency>
     </dependencies>
     <modules>
-        <module>ohh-util</module>
+        <module>ohh-dynamic</module>
         <module>ohh-main</module>
         <module>ohh-dao</module>
         <module>ohh-web</module>
