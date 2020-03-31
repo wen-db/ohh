@@ -3,10 +3,9 @@
  */
 package org.wenruo.ohh.main;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -14,12 +13,11 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = {"org.wenruo"})
-public class Application implements EmbeddedServletContainerCustomizer {
+@MapperScan("org.wenruo.ohh.dao.mapper")
+public class Application  {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
-    public void customize(ConfigurableEmbeddedServletContainer configurableEmbeddedServletContainer) {
-        configurableEmbeddedServletContainer.setPort(8888);
-    }
+
 }

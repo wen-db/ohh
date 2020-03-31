@@ -13,14 +13,19 @@
     <dependencies>
         <dependency>
             <groupId>org.wenruo.ohh</groupId>
-            <artifactId>ohh-util</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.wenruo.ohh</groupId>
             <artifactId>ohh-dao</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>
