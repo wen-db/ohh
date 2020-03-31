@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.UnexpectedRollbackException;
-import org.wenruo.dynamic.datasource.TargetDataSource;
+import org.wenruo.dynamic.datasource.DS;
 import org.wenruo.ohh.dao.model.AdminLoginLog;
 import org.wenruo.ohh.dao.model.AdminUser;
 import org.wenruo.ohh.service.trans.AnnotationTransService;
@@ -33,7 +33,7 @@ public class DynamicTest extends AbstractTest {
      * 在事务方法内抛出异常，在事务外吃掉，事务会回滚
      */
     @Test
-    @TargetDataSource("d1")
+    @DS("d0")
     public void test_notTrans_TransInnerTryCatch() {
         AdminUser adminUser = buildAdminUser();
         annotationTransService.test_notTrans_TransInnerTryCatch(adminUser);

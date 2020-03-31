@@ -2,6 +2,7 @@ package org.wenruo.dynamic.datasource;
 
 import org.springframework.jdbc.datasource.AbstractDataSource;
 import org.wenruo.dynamic.datasource.config.DynamicDataSourceContextHolder;
+import org.wenruo.dynamic.datasource.exception.DynamicDatasourceException;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -17,7 +18,6 @@ public class DynamicRoutingDataSource extends AbstractDataSource {
      * 所有数据库
      */
     private static Map<String, DataSource> dataSourceMap;
-
     @Override
     public Connection getConnection() throws SQLException {
         return getDatasource().getConnection();
@@ -36,13 +36,14 @@ public class DynamicRoutingDataSource extends AbstractDataSource {
         }
         DataSource dataSource = dataSourceMap.get(datasourceName);
         if (dataSource == null) {
-            throw new RuntimeException("can not routing datasource");
+            throw new DynamicDatasourceException("can not routing datasource");
         }
         return dataSource;
     }
 
     public static void init(Map<String, DataSource> dataSourceMap) {
         DynamicRoutingDataSource.dataSourceMap = dataSourceMap;
+
     }
 
 }
