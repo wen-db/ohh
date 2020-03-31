@@ -1,0 +1,25 @@
+spring:
+  datasource:
+        url: jdbc:mysql://127.0.0.1:3306/db_0?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+        username: root
+        password: 89iokl,.
+
+mybatis:
+  type-aliases-package: org.wenruo.ohh.dao.model
+  mapperLocations: classpath:mappers/*Mapper.xml
+  configuration:
+    # 开启驼峰命名转换
+    map-underscore-to-camel-case: true
+
+#动态数据源
+dynamic:
+  datasource:
+    allDatasource:
+      master:
+        url: jdbc:mysql://127.0.0.1:3306/db_0?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+        username: root
+        password: 89iokl,.
+      d2:
+        url: jdbc:mysql://127.0.0.1:3306/db_0?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+        username: root
+        password: 89iokl,.
