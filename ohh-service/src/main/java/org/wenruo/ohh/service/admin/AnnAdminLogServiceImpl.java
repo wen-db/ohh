@@ -19,30 +19,36 @@ import org.wenruo.ohh.dao.model.AdminUser;
  **/
 @Service
 @Slf4j
-@Transactional(rollbackFor = RuntimeException.class)
-public class AnnotationTransBService implements TransTestService<AdminLoginLog> {
+public class AnnAdminLogServiceImpl implements TransTestService<AdminLoginLog> {
     @Autowired
     private AdminLoginLogMapper adminLoginLogMapper;
 
 
-    private void throwRuntimeException() {
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public void insert(AdminLoginLog adminLoginLog) {
+        adminLoginLogMapper.insert(adminLoginLog);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = RuntimeException.class)
+    public void newTrans(AdminLoginLog adminLoginLog) {
+        adminLoginLogMapper.insert(adminLoginLog);
+    }
+
+    @Override
+    public void throwRuntimeException(AdminLoginLog loginLog) {
+        throwNewRuntimeException();
+    }
+
+    @Override
+    public void insertAndThrowsRuntimeException(AdminLoginLog adminLoginLog) {
+        adminLoginLogMapper.insert(adminLoginLog);
+        throwNewRuntimeException();
+    }
+
+    @Override
+    public void throwNewRuntimeException() {
         throw new RuntimeException("test trans annotation B throws new  runtimeException");
-    }
-
-
-    @Override
-    public void tesInsert(AdminLoginLog adminLoginLog) {
-        adminLoginLogMapper.insert(adminLoginLog);
-    }
-
-    @Override
-    public void testThrowRuntimeException(AdminLoginLog loginLog) {
-        throwRuntimeException();
-    }
-
-    @Override
-    public void testInsertAndThrowsRuntimeException(AdminLoginLog adminLoginLog) {
-        adminLoginLogMapper.insert(adminLoginLog);
-        throwRuntimeException();
     }
 }

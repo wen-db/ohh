@@ -1,20 +1,18 @@
-package com.wenruo.service.test;
+package org.wenruo.service.test.main.trans;
 
-import com.wenruo.service.test.base.AbstractTest;
-import com.wenruo.service.test.base.TestApplication;
+import org.wenruo.service.test.base.AbstractTest;
+import org.wenruo.service.test.base.TestApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.UnexpectedRollbackException;
-import org.wenruo.ohh.dao.mapper.AdminUserMapper;
 import org.wenruo.ohh.dao.model.AdminLoginLog;
 import org.wenruo.ohh.dao.model.AdminUser;
-import org.wenruo.ohh.service.trans.AnnotationTransService;
+import org.wenruo.ohh.service.trans.AnnotationTransServiceImpl;
 
 import java.util.Date;
 
@@ -27,7 +25,7 @@ import java.util.Date;
 @Slf4j
 public class ProgrammingTransTest extends AbstractTest {
     @Autowired
-    private AnnotationTransService annotationTransService;
+    private AnnotationTransServiceImpl annotationTransServiceImpl;
 
     /**
      * 在事务方法内抛出异常，在事务外吃掉，事务会回滚
@@ -35,7 +33,7 @@ public class ProgrammingTransTest extends AbstractTest {
     @Test
     public void test_notTrans_TransInnerTryCatch() {
         AdminUser adminUser = buildAdminUser();
-        annotationTransService.test_notTrans_TransInnerTryCatch(adminUser);
+        annotationTransServiceImpl.test_notTrans_TransInnerTryCatch(adminUser);
         checkResult(adminUser, false);
 
     }
@@ -49,7 +47,7 @@ public class ProgrammingTransTest extends AbstractTest {
         AdminUser adminUser = buildAdminUser();
         AdminLoginLog adminLoginLog = buildAdminLog();
         try {
-            annotationTransService.testTransAfterTryCatchAndInsert(adminUser, adminLoginLog);
+            annotationTransServiceImpl.testNewTrans(adminUser, adminLoginLog);
         } catch (Exception e) {
             log.error("", e);
             Assert.assertTrue("预期 rollback-only 异常类", e instanceof UnexpectedRollbackException);
@@ -65,14 +63,9 @@ public class ProgrammingTransTest extends AbstractTest {
     @Test
     public void testTransInnerTryCatch() {
         AdminUser adminUser = buildAdminUser();
-        annotationTransService.testTransInnerTryCatch(adminUser);
+        annotationTransServiceImpl.testTransInnerTryCatch(adminUser);
         checkResult(adminUser, true);
 
-    }
-
-    @Test
-    public void  t(){
-        MybatisProperties mybatisProperties  =new MybatisProperties();
     }
 
 

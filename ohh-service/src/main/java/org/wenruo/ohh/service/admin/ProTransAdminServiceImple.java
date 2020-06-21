@@ -3,6 +3,7 @@ package org.wenruo.ohh.service.admin;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.wenruo.ohh.dao.mapper.AdminUserMapper;
 import org.wenruo.ohh.dao.model.AdminUser;
@@ -15,7 +16,7 @@ import org.wenruo.ohh.dao.model.AdminUser;
  **/
 @Service
 @Slf4j
-public class ProgrammingTransAService implements TransTestService<AdminUser> {
+public class ProTransAdminServiceImple implements TransTestService<AdminUser> {
     @Autowired
     private TransactionTemplate transactionTemplate;
     @Autowired
@@ -23,12 +24,21 @@ public class ProgrammingTransAService implements TransTestService<AdminUser> {
 
 
     @Override
-    public void tesInsert(AdminUser adminUser) {
+    public void insert(AdminUser adminUser) {
         adminUserMapper.insert(adminUser);
     }
 
     @Override
-    public void testThrowRuntimeException(AdminUser adminUser) {
+    public void newTrans(AdminUser adminUser) {
+        transactionTemplate.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+        transactionTemplate.execute(status -> {
+            adminUserMapper.insert(adminUser);
+            return null;
+        });
+    }
+
+    @Override
+    public void throwRuntimeException(AdminUser adminUser) {
         transactionTemplate.execute(status -> {
             try {
                 adminUserMapper.insert(adminUser);
@@ -43,7 +53,7 @@ public class ProgrammingTransAService implements TransTestService<AdminUser> {
     }
 
     @Override
-    public void testInsertAndThrowsRuntimeException(AdminUser adminUser) {
+    public void insertAndThrowsRuntimeException(AdminUser adminUser) {
         transactionTemplate.execute(status -> {
             try {
                 adminUserMapper.insert(adminUser);
@@ -58,7 +68,8 @@ public class ProgrammingTransAService implements TransTestService<AdminUser> {
     }
 
 
-    private void throwNewRuntimeException() {
+    @Override
+    public void throwNewRuntimeException() {
         throw new RuntimeException(" new Programming runtime exception");
     }
 }

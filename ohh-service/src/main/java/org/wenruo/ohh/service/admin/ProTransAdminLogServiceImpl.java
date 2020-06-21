@@ -3,6 +3,8 @@ package org.wenruo.ohh.service.admin;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionCallback;
@@ -17,7 +19,7 @@ import org.wenruo.ohh.dao.model.AdminUser;
  **/
 @Service
 @Slf4j
-public class ProgrammingTransBService implements TransTestService<AdminLoginLog> {
+public class ProTransAdminLogServiceImpl implements TransTestService<AdminLoginLog> {
     @Autowired
     private TransactionTemplate transactionTemplate;
     @Autowired
@@ -25,12 +27,21 @@ public class ProgrammingTransBService implements TransTestService<AdminLoginLog>
 
 
     @Override
-    public void tesInsert(AdminLoginLog adminLoginLog) {
+    public void insert(AdminLoginLog adminLoginLog) {
         adminLoginLogMapper.insert(adminLoginLog);
     }
 
     @Override
-    public void testThrowRuntimeException(AdminLoginLog adminLoginLog) {
+    public void newTrans(AdminLoginLog adminLoginLog) {
+        transactionTemplate.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+        transactionTemplate.execute(status -> {
+            adminLoginLogMapper.insert(adminLoginLog);
+            return null;
+        });
+    }
+
+    @Override
+    public void throwRuntimeException(AdminLoginLog adminLoginLog) {
         transactionTemplate.execute(status -> {
             adminLoginLogMapper.insert(adminLoginLog);
             return null;
@@ -40,7 +51,7 @@ public class ProgrammingTransBService implements TransTestService<AdminLoginLog>
     }
 
     @Override
-    public void testInsertAndThrowsRuntimeException(AdminLoginLog adminLoginLog) {
+    public void insertAndThrowsRuntimeException(AdminLoginLog adminLoginLog) {
         transactionTemplate.execute(status -> {
             try {
                 adminLoginLogMapper.insert(adminLoginLog);
@@ -53,7 +64,7 @@ public class ProgrammingTransBService implements TransTestService<AdminLoginLog>
         });
     }
 
-    private void throwNewRuntimeException() {
+    public void throwNewRuntimeException() {
         throw new RuntimeException(" new Programming B runtime exception");
     }
 }

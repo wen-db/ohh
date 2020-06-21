@@ -1,4 +1,4 @@
-package com.wenruo.service.test;
+package org.wenruo.service.test;
 
 import org.junit.Test;
 
@@ -12,5 +12,6 @@ public class Tests {
     @Test
     public void t() throws IOException {
         String mapperLocations ="";
+        System.out.println(100690%520 );
     }
 }

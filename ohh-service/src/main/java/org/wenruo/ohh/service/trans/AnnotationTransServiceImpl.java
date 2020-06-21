@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.wenruo.ohh.dao.model.AdminLoginLog;
 import org.wenruo.ohh.dao.model.AdminUser;
-import org.wenruo.ohh.service.admin.AnnotationTransAService;
-import org.wenruo.ohh.service.admin.AnnotationTransBService;
+import org.wenruo.ohh.service.admin.AnnAdminLogServiceImpl;
+import org.wenruo.ohh.service.admin.AnnAdminUserServiceImpl;
 
 /**
  * @author wendebao
@@ -15,32 +15,29 @@ import org.wenruo.ohh.service.admin.AnnotationTransBService;
  **/
 @Service
 @Slf4j
-public class AnnotationTransService {
+public class AnnotationTransServiceImpl {
     @Autowired
-    private AnnotationTransAService aService;
+    private AnnAdminLogServiceImpl annAdminLogService;
     @Autowired
-    private AnnotationTransBService bService;
+    private AnnAdminUserServiceImpl annAdminUserService;
 
 
     @Transactional(rollbackFor = RuntimeException.class)
     public void testTransInnerTryCatch(AdminUser adminUser) {
-        aService.testInsertAndTryCatch(adminUser);
+        annAdminUserService.insertAndThrowsRuntimeException(adminUser);
     }
 
     public void test_notTrans_TransInnerTryCatch(AdminUser adminUser) {
         try {
-            aService.testInsertAndThrowsRuntimeException(adminUser);
+            annAdminUserService.insert(adminUser);
         } catch (Exception e) {
             log.error("", e);
         }
     }
     @Transactional(rollbackFor = RuntimeException.class)
-    public void testTransAfterTryCatchAndInsert(AdminUser adminUser, AdminLoginLog adminLoginLog) {
-        try {
-            aService.testInsertAndThrowsRuntimeException(adminUser);
-        } catch (Exception e) {
-            log.error("", e);
-        }
-        bService.tesInsert(adminLoginLog);
+    public void testNewTrans(AdminUser adminUser, AdminLoginLog adminLoginLog) {
+      annAdminUserService.newTrans(adminUser);
+      annAdminLogService.insertAndThrowsRuntimeException(adminLoginLog);
+
     }
 }

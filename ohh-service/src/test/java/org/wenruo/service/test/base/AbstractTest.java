@@ -1,4 +1,4 @@
-package com.wenruo.service.test.base;
+package org.wenruo.service.test.base;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +30,7 @@ public abstract class AbstractTest {
         System.out.println("B 数据是否执行：" + execute);
         boolean commit =  execute && adminLoginLogMapper.selectByPrimaryKey(adminLoginLog.getId()) != null;
         System.out.println("B 事务是否提交：" + commit);
+        assertEquals(targetCommit, commit);
     }
 
 
