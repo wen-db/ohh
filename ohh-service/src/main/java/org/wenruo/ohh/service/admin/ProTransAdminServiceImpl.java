@@ -9,14 +9,14 @@ import org.wenruo.ohh.dao.mapper.AdminUserMapper;
 import org.wenruo.ohh.dao.model.AdminUser;
 
 /**
- * 编程示事务
+ * 编程式事务
  *
  * @author wendebao
  * @Date 2020/3/23
  **/
 @Service
 @Slf4j
-public class ProTransAdminServiceImple implements TransTestService<AdminUser> {
+public class ProTransAdminServiceImpl implements TransTestService<AdminUser> {
     @Autowired
     private TransactionTemplate transactionTemplate;
     @Autowired

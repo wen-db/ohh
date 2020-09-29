@@ -19,21 +19,27 @@ public abstract class AbstractTest {
 
     public void checkResult(AdminUser adminUser, boolean targetCommit) {
         boolean execute = adminUser.getId() != null;
-        System.out.println("A 数据是否执行：" + execute);
+        System.out.println("adminUser 数据是否执行：" + execute);
         boolean commit = execute && adminUserMapper.selectByPrimaryKey(adminUser.getId()) != null;
-        System.out.println("A 事务是否提交：" + commit);
+        System.out.println("adminUser 事务是否提交：" + commit);
         assertEquals(targetCommit, commit);
     }
 
     public void checkResult(AdminLoginLog adminLoginLog, boolean targetCommit) {
         boolean execute = adminLoginLog.getId() != null;
-        System.out.println("B 数据是否执行：" + execute);
+        System.out.println("AdminLoginLog 数据是否执行：" + execute);
         boolean commit =  execute && adminLoginLogMapper.selectByPrimaryKey(adminLoginLog.getId()) != null;
-        System.out.println("B 事务是否提交：" + commit);
+        System.out.println("AdminLoginLog 事务是否提交：" + commit);
         assertEquals(targetCommit, commit);
     }
-
-
+    public boolean isCommit(AdminUser adminUser){
+        Assert.assertNotNull(adminUser.getId());
+       return adminUserMapper.selectByPrimaryKey(adminUser.getId()) != null;
+    }
+    public boolean isCommit(AdminLoginLog adminLoginLog){
+        Assert.assertNotNull(adminLoginLog.getId());
+        return adminLoginLogMapper.selectByPrimaryKey(adminLoginLog.getId()) != null;
+    }
     private void assertEquals(boolean targetCommit, boolean commit) {
         Assert.assertEquals(buildMsg(targetCommit, commit), targetCommit, commit);
     }

@@ -3,10 +3,9 @@ package org.wenruo.ohh.service.trans;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.wenruo.ohh.service.admin.AnnAdminLogServiceImpl;
-import org.wenruo.ohh.service.admin.AnnAdminUserServiceImpl;
-import org.wenruo.ohh.service.admin.ProTransAdminLogServiceImpl;
-import org.wenruo.ohh.service.admin.ProTransAdminServiceImple;
+import org.springframework.transaction.support.TransactionTemplate;
+import org.wenruo.ohh.dao.mapper.AdminUserMapper;
+import org.wenruo.ohh.dao.model.AdminUser;
 
 /**
  * @author wendebao
@@ -16,7 +15,14 @@ import org.wenruo.ohh.service.admin.ProTransAdminServiceImple;
 @Slf4j
 public class ProgrammingTransServiceImpl {
     @Autowired
-    private ProTransAdminServiceImple proTransAdminServiceImple;
+    private TransactionTemplate transactionTemplate;
     @Autowired
-    private ProTransAdminLogServiceImpl proTransAdminLogService;
+    private AdminUserMapper adminUserMapper;
+
+    public void testTransInnerTryCatch(AdminUser adminUser) {
+        transactionTemplate.execute(status -> {
+            adminUserMapper.insert(adminUser);
+            return null;
+        });
+    }
 }

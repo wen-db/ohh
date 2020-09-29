@@ -64,6 +64,7 @@ public class ProTransAdminLogServiceImpl implements TransTestService<AdminLoginL
         });
     }
 
+    @Override
     public void throwNewRuntimeException() {
         throw new RuntimeException(" new Programming B runtime exception");
     }

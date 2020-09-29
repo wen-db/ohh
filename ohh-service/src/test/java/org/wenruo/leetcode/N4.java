@@ -1,7 +1,5 @@
 package org.wenruo.leetcode;
 
-import org.wenruo.leetcode.LeetCode;
-
 /**
  * @author wendebao
  * @Date 2020/6/12
@@ -39,18 +37,14 @@ public class N4 extends LeetCode {
         int lmax = Math.min(num1[num1.length - 1], num2[num2.length - 1]);
         int rmint = Math.min(num1[0], num2[0]);
         for (int i = 0; i < num1.length; i++) {
-            if (num1[i])
+         //   if (num1[i])
         }
         return new Object[0];
     }
 
     @Override
-    Object[][] buildArgs() {
-        return new Object[0][];
+    Args[] buildArgs() {
+        return new Args[0];
     }
 
-    @Override
-    boolean check(Object[] res, Object[] args) {
-        return true;
-    }
 }

@@ -44,19 +44,13 @@ public class N3 extends LeetCode {
 
 
     @Override
-    Object[][] buildArgs() {
-        char[] arg = new char[new Random().nextInt(100) + 3];
-        for (int i = 0; i < arg.length; i++) {
-            arg[i] = (char) (new Random().nextInt(26) + 97);
-        }
-        return new Object[][]{new Object[]{new String(arg)},
-                new Object[]{"abcabcbb"}, new Object[]{"bbbbb"}
-                , new Object[]{"pwwkew"}};
+    Args[] buildArgs() {
+        return new Args[]{
+                new Args(new Arg("abcabcbb"), new Res(3)),
+                new Args(new Arg("bbbbb"), new Res(1)),
+                new Args(new Arg("pwwkew"), new Res(3)),
+        };
     }
 
-    @Override
-    boolean check(Object[] res, Object... args) {
-        int max = (int) res[0];
-        return true;
-    }
+
 }

@@ -3,6 +3,7 @@ package org.wenruo.ohh.service.trans;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.wenruo.ohh.dao.model.AdminLoginLog;
 import org.wenruo.ohh.dao.model.AdminUser;
@@ -38,6 +39,21 @@ public class AnnotationTransServiceImpl {
     public void testNewTrans(AdminUser adminUser, AdminLoginLog adminLoginLog) {
       annAdminUserService.newTrans(adminUser);
       annAdminLogService.insertAndThrowsRuntimeException(adminLoginLog);
+
+    }
+
+    @Transactional(rollbackFor = RuntimeException.class,propagation = Propagation.NESTED)
+    public void PROPAGATION_NESTED(AdminLoginLog adminLoginLog){
+        annAdminLogService.insert(adminLoginLog);
+    }
+    @Transactional(rollbackFor = RuntimeException.class,propagation = Propagation.NESTED)
+    public void PROPAGATION_NESTED_Exception(AdminLoginLog adminLoginLog){
+        annAdminLogService.insert(adminLoginLog);
+        throw new RuntimeException("PROPAGATION_NESTED_exception_Subtransaction");
+    }
+    @Transactional(rollbackFor = RuntimeException.class)
+    public void simple(AdminLoginLog adminLoginLog) {
+        annAdminLogService.insertAndThrowsRuntimeException(adminLoginLog);
 
     }
 }
