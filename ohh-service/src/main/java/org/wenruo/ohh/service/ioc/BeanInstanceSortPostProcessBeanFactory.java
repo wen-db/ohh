@@ -15,10 +15,10 @@ import org.springframework.stereotype.Component;
 public class BeanInstanceSortPostProcessBeanFactory implements BeanFactoryPostProcessor {
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-      /*  DefaultListableBeanFactory factory = (DefaultListableBeanFactory) beanFactory;
+        DefaultListableBeanFactory factory = (DefaultListableBeanFactory) beanFactory;
         BeanDefinition a= factory.getBeanDefinition("a");
         BeanDefinition b= factory.getBeanDefinition("b");
         factory.removeBeanDefinition("a");
-        factory.registerBeanDefinition("a",a);*/
+        factory.registerBeanDefinition("a",a);
     }
 }

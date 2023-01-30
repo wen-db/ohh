@@ -1,6 +1,4 @@
-/**
- * Copyright (C), 2011-2018, 微贷网.
- */
+
 package org.wenruo.ohh.web;
 
 import org.springframework.beans.factory.annotation.Autowired;

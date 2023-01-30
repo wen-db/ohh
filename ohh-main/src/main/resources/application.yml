@@ -1,11 +1,12 @@
-spring:
+#动态数据源
+dynamic:
   datasource:
-    dataMap:
-      ds1:
+    allDatasource:
+      master:
         url: jdbc:mysql://127.0.0.1:3306/db_0?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
         username: root
         password: 89iokl,.
-      ds2:
+      d2:
         url: jdbc:mysql://127.0.0.1:3306/db_0?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
         username: root
         password: 89iokl,.

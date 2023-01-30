@@ -1,6 +1,4 @@
-/**
- * Copyright (C), 2011-2018, 微贷网.
- */
+
 package org.wenruo.service.test.base;
 
 import org.mybatis.spring.annotation.MapperScan;
