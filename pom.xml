@@ -16,7 +16,7 @@
     <properties>
         <spring-boot.version>2.2.1.RELEASE</spring-boot.version>
         <poi.version>3.15</poi.version>
-        <mysql-connector-java.version>8.0.11</mysql-connector-java.version>
+        <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
         <mybatis.verison>3.4.6</mybatis.verison>
     </properties>
 
