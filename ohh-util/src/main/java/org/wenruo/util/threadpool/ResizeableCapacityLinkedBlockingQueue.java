@@ -173,7 +173,7 @@ public class ResizeableCapacityLinkedBlockingQueue<E> extends AbstractQueue<E>
         int oldCapacity = this.capacity;
         this.capacity = capacity;
         if (capacity>oldCapacity && count.get()>=oldCapacity){
-            signalNotFull();
+       //     signalNotFull();
         }
     }
 

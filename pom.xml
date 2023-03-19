@@ -53,6 +53,12 @@
                 <artifactId>spring-boot-starter-jdbc</artifactId>
                 <version>2.2.5.RELEASE</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.redisson/redisson -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>3.16.0</version>
+            </dependency>
 
 
 
@@ -96,11 +102,12 @@
         </dependency>
     </dependencies>
     <modules>
-        <module>ohh-dynamic</module>
+        <module>ohh-util</module>
         <module>ohh-main</module>
         <module>ohh-dao</module>
         <module>ohh-web</module>
         <module>ohh-service</module>
+        <module>ohh-test</module>
     </modules>
 
 
