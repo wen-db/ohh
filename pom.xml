@@ -8,7 +8,13 @@
     <groupId>org.wenruo.ohh</groupId>
     <version>1.0.0-SNAPSHOT</version>
 
-
+    <modules>
+        <module>ohh-util</module>
+        <module>ohh-main</module>
+        <module>ohh-dao</module>
+        <module>ohh-web</module>
+        <module>ohh-service</module>
+    </modules>
     <packaging>pom</packaging>
 
 
@@ -101,14 +107,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <modules>
-        <module>ohh-util</module>
-        <module>ohh-main</module>
-        <module>ohh-dao</module>
-        <module>ohh-web</module>
-        <module>ohh-service</module>
-        <module>ohh-test</module>
-    </modules>
+
 
 
 
